@@ -123,7 +123,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="system-architecture" className="bg-[#060708] px-6 py-14 md:px-12 md:py-20">
+      <section
+        id="system-architecture"
+        className="bg-[#060708] px-6 pt-32 pb-14 md:px-12 md:pt-40 md:pb-20"
+      >
         <div className="w-full">
           <h2 className="text-3xl font-black uppercase tracking-tight md:text-5xl">
             System Architecture
