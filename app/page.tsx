@@ -1,4 +1,23 @@
+ "use client";
+
+import { useEffect, useState } from "react";
+
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isModalOpen) return;
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsModalOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [isModalOpen]);
+
   return (
     <main className="bg-black text-white">
       <section>
@@ -11,10 +30,10 @@ export default function Home() {
               backgroundColor: "#0a0a0a",
             }}
           />
-          <div className="absolute inset-0 bg-black/45" />
+          <div className="ambient-glow absolute inset-0 bg-black/45" />
 
           <div className="relative z-10 flex min-h-screen flex-col">
-            <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-white/15 bg-white/6 px-5 py-4 text-[10px] font-semibold uppercase tracking-[0.14em] backdrop-blur-md md:px-10 md:py-5 md:text-xs">
+            <header className="animate-fade-up fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-white/15 bg-white/6 px-5 py-4 text-[10px] font-semibold uppercase tracking-[0.14em] backdrop-blur-md md:px-10 md:py-5 md:text-xs">
               <div className="flex items-center gap-4">
                 <span className="text-xl font-black tracking-[0.1em]">FOCUSX</span>
                 <span className="hidden text-white/45 md:inline">|</span>
@@ -24,45 +43,48 @@ export default function Home() {
               </div>
 
               <nav className="hidden items-center gap-10 text-white/85 md:flex">
-                <a href="#" className="border-b border-white pb-1 text-white">
+                <a href="#" className="interactive border-b border-white pb-1 text-white">
                   Platform
                 </a>
-                <a href="#" className="hover:text-white">
+                <a href="#system-architecture" className="interactive hover:text-white">
                   Methodology
                 </a>
-                <a href="#" className="hover:text-white">
-                  Security
+                <a href="#the-origin" className="interactive hover:text-white">
+                  Origin
                 </a>
               </nav>
 
-              <button className="bg-white px-5 py-3 text-[11px] font-extrabold tracking-[0.14em] text-black uppercase md:px-8 md:py-4">
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="interactive cursor-pointer bg-white px-5 py-3 text-[11px] font-extrabold tracking-[0.14em] text-black uppercase hover:bg-white/90 md:px-8 md:py-4"
+              >
                 Get Started
               </button>
             </header>
 
             <section className="flex flex-1 flex-col items-center justify-center px-5 pt-24 text-center md:px-10 md:pt-28">
-              <p className="mb-2 text-[12px] font-semibold uppercase tracking-[0.5em] text-white/55 md:text-[14px]">
+              <p className="animate-fade-up delay-100 mb-2 text-[12px] font-semibold uppercase tracking-[0.5em] text-white/55 md:text-[14px]">
                 Ansh Presents
               </p>
-              <p className="mb-10 text-[14px] font-semibold uppercase tracking-[0.42em] text-white/80 md:text-[18px]">
+              <p className="animate-fade-up delay-200 mb-10 text-[14px] font-semibold uppercase tracking-[0.42em] text-white/80 md:text-[18px]">
                 Initiating Sequence
               </p>
 
-              <h1 className="max-w-[1180px] text-[52px] leading-[0.94] font-black uppercase tracking-tight md:text-[132px]">
+              <h1 className="animate-fade-up delay-300 max-w-[1180px] text-[52px] leading-[0.94] font-black uppercase tracking-tight md:text-[132px]">
                 The Monolith
                 <br />
                 Protocol
               </h1>
 
-              <p className="mt-8 text-[18px] font-semibold uppercase tracking-[0.08em] text-white/75 md:text-[46px] md:leading-none">
-                Elite Discipline for the 01%.
+              <p className="animate-fade-up delay-400 mt-8 text-[18px] font-semibold uppercase tracking-[0.08em] text-white/75 md:text-[46px] md:leading-none">
+                Elite Discipline like the 0.1%.
               </p>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <button className="min-w-[150px] bg-white px-8 py-3 text-[12px] font-extrabold uppercase tracking-[0.22em] text-black md:min-w-[220px] md:py-4">
+              <div className="animate-fade-up delay-400 mt-8 flex flex-col gap-3 sm:flex-row">
+                <button className="interactive min-w-[150px] cursor-pointer bg-white px-8 py-3 text-[12px] font-extrabold uppercase tracking-[0.22em] text-black hover:bg-white/90 md:min-w-[220px] md:py-4">
                   Enlist Now
                 </button>
-                <button className="min-w-[150px] bg-[#2f2f2f]/90 px-8 py-3 text-[12px] font-extrabold uppercase tracking-[0.22em] text-white md:min-w-[220px] md:py-4">
+                <button className="interactive min-w-[150px] cursor-pointer bg-[#2f2f2f]/90 px-8 py-3 text-[12px] font-extrabold uppercase tracking-[0.22em] text-white hover:bg-[#3a3a3a]/95 md:min-w-[220px] md:py-4">
                   Identify
                 </button>
               </div>
@@ -74,7 +96,7 @@ export default function Home() {
       <section className="relative border-t border-white/15 bg-[#0b0b0b]">
         <div className="pointer-events-none absolute top-0 left-1/2 h-[2px] w-full max-w-[1024px] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/45 to-transparent" />
         <div className="grid w-full grid-cols-1 gap-10 px-8 py-14 text-center sm:grid-cols-3 md:px-24 md:py-16">
-          <div>
+          <div className="animate-fade-up">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50">
               Active Nodes
             </p>
@@ -82,7 +104,7 @@ export default function Home() {
               12,842
             </p>
           </div>
-          <div>
+          <div className="animate-fade-up delay-100">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50">
               System Uptime
             </p>
@@ -90,7 +112,7 @@ export default function Home() {
               99.99%
             </p>
           </div>
-          <div>
+          <div className="animate-fade-up delay-200">
             <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50">
               Average Focus
             </p>
@@ -101,7 +123,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#060708] px-6 py-14 md:px-12 md:py-20">
+      <section id="system-architecture" className="bg-[#060708] px-6 py-14 md:px-12 md:py-20">
         <div className="w-full">
           <h2 className="text-3xl font-black uppercase tracking-tight md:text-5xl">
             System Architecture
@@ -109,14 +131,20 @@ export default function Home() {
           <div className="mt-4 h-[6px] w-20 bg-white" />
 
           <div className="mt-12 grid grid-cols-1 overflow-hidden border border-white/10 md:grid-cols-3">
-            <article className="bg-[#0c0d0e] p-10 md:min-h-[330px]">
+            <article className="interactive animate-fade-up bg-[#0c0d0e] p-10 md:min-h-[330px]">
               <svg
                 viewBox="0 0 24 24"
-                className="h-8 w-8 text-white"
-                fill="currentColor"
+                className="h-9 w-9 text-white/95"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 aria-hidden="true"
               >
-                <path d="M17 8h-1V6a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2Zm-7-2a2 2 0 1 1 4 0v2h-4V6Z" />
+                <rect x="4" y="10" width="16" height="10" rx="2" />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+                <circle cx="12" cy="15" r="1.4" fill="currentColor" stroke="none" />
               </svg>
               <h3 className="mt-24 text-[34px] leading-none font-black uppercase tracking-tight">
                 Hard Lock Mode
@@ -127,14 +155,23 @@ export default function Home() {
               </p>
             </article>
 
-            <article className="bg-[#111315] p-10 md:min-h-[330px]">
+            <article className="interactive animate-fade-up delay-100 bg-[#111315] p-10 md:min-h-[330px]">
               <svg
                 viewBox="0 0 24 24"
-                className="h-8 w-8 text-white"
-                fill="currentColor"
+                className="h-9 w-9 text-white/95"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 aria-hidden="true"
               >
-                <path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm2 3v8h12V8H6Zm2 6h2v-3H8v3Zm3 0h2V9h-2v5Zm3 0h2v-2h-2v2Z" />
+                <rect x="3" y="4" width="18" height="16" rx="2.5" />
+                <path d="M7 15v-2" />
+                <path d="M11 15V9" />
+                <path d="M15 15v-4" />
+                <path d="M19 15v-7" />
+                <path d="M6.5 18.5h11" />
               </svg>
               <h3 className="mt-24 text-[34px] leading-none font-black uppercase tracking-tight">
                 Deep Analytics
@@ -145,14 +182,23 @@ export default function Home() {
               </p>
             </article>
 
-            <article className="bg-[#0c0d0e] p-10 md:min-h-[330px]">
+            <article className="interactive animate-fade-up delay-200 bg-[#0c0d0e] p-10 md:min-h-[330px]">
               <svg
                 viewBox="0 0 24 24"
-                className="h-8 w-8 text-white"
-                fill="currentColor"
+                className="h-9 w-9 text-white/95"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 aria-hidden="true"
               >
-                <path d="M7 3h10v2h-1v4a4 4 0 0 1-3 3.87V16h3v2H8v-2h3v-3.13A4 4 0 0 1 8 9V5H7V3Zm3 2v4a2 2 0 1 0 4 0V5h-4Zm-4 1h2v3a4.98 4.98 0 0 1-.76 2.65A5.98 5.98 0 0 1 4 14V12a4 4 0 0 0 2-3V6Zm12 0h2v3a4 4 0 0 0 2 3v2a5.98 5.98 0 0 1-3.24-2.35A4.98 4.98 0 0 1 18 9V6Z" />
+                <path d="M8 4h8v3a4 4 0 0 1-8 0V4Z" />
+                <path d="M6 5H4a4 4 0 0 0 4 5" />
+                <path d="M18 5h2a4 4 0 0 1-4 5" />
+                <path d="M12 11v4" />
+                <path d="M9 20h6" />
+                <path d="M8 16h8" />
               </svg>
               <h3 className="mt-24 text-[34px] leading-none font-black uppercase tracking-tight">
                 Achievement Tiers
@@ -198,7 +244,7 @@ export default function Home() {
           </div>
 
           <div className="mt-12">
-            <button className="min-w-[280px] bg-white px-12 py-5 text-[20px] font-extrabold uppercase tracking-[0.34em] text-black md:min-w-[420px] md:text-[32px]">
+            <button className="interactive min-w-[280px] cursor-pointer bg-white px-12 py-5 text-[20px] font-extrabold uppercase tracking-[0.34em] text-black hover:bg-white/90 md:min-w-[420px] md:text-[32px]">
               Initialize
             </button>
           </div>
@@ -213,7 +259,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#070809] px-6 py-20 text-center md:py-28">
+      <section id="the-origin" className="bg-[#070809] px-6 py-20 text-center md:py-28">
         <div className="mx-auto flex max-w-[980px] flex-col items-center">
           <h2 className="text-[54px] leading-none font-black uppercase tracking-tight md:text-[88px]">
             The Origin
@@ -225,7 +271,7 @@ export default function Home() {
             href="https://anshapps.in"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-14 inline-flex min-w-[260px] cursor-pointer items-center justify-center border-2 border-white/65 bg-transparent px-10 py-4 text-[18px] font-extrabold uppercase tracking-[0.28em] text-white md:min-w-[520px] md:py-6 md:text-[30px]"
+            className="interactive mt-14 inline-flex min-w-[260px] cursor-pointer items-center justify-center border-2 border-white/65 bg-transparent px-10 py-4 text-[18px] font-extrabold uppercase tracking-[0.28em] text-white hover:border-white hover:bg-white/10 md:min-w-[520px] md:py-6 md:text-[30px]"
           >
             Visit Ansh
           </a>
@@ -247,18 +293,52 @@ export default function Home() {
           </p>
 
           <nav className="flex items-center gap-10">
-            <a href="#" className="border-b border-white/40 pb-1 text-white/70">
+            <a href="#" className="interactive border-b border-white/40 pb-1 text-white/70 hover:text-white">
               Privacy
             </a>
-            <a href="#" className="border-b border-white/40 pb-1 text-white/70">
+            <a href="#" className="interactive border-b border-white/40 pb-1 text-white/70 hover:text-white">
               Terms
             </a>
-            <a href="#" className="border-b border-white/40 pb-1 text-white/70">
+            <a href="#" className="interactive border-b border-white/40 pb-1 text-white/70 hover:text-white">
               Contact
             </a>
           </nav>
         </div>
       </footer>
+
+      {isModalOpen ? (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 px-4 backdrop-blur-sm"
+          onClick={() => setIsModalOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Focusx building phase notice"
+        >
+          <div
+            className="animate-fade-up relative w-full max-w-[560px] border border-white/20 bg-[#121418]/90 p-8 text-center shadow-[0_20px_80px_rgba(0,0,0,0.6)] md:p-10"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="interactive absolute top-3 right-3 cursor-pointer px-2 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/60 hover:text-white"
+              aria-label="Close popup"
+            >
+              Close
+            </button>
+
+            <p className="text-[34px] leading-none font-black uppercase tracking-[0.08em] md:text-[48px]">
+              Focusx
+            </p>
+            <div className="mx-auto mt-5 h-px w-full max-w-[340px] bg-white/20" />
+            <p className="mt-5 text-[13px] font-semibold uppercase tracking-[0.3em] text-white/65 md:text-[15px]">
+              App is in building phase
+            </p>
+            <p className="mt-3 text-[14px] font-semibold uppercase tracking-[0.24em] text-white/80 md:text-[18px]">
+              Made for 0.1% thinkers
+            </p>
+          </div>
+        </div>
+      ) : null}
     </main>
   );
 }

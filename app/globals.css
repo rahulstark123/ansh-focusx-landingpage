@@ -24,3 +24,91 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes soft-glow {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes slow-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-fade-up {
+  opacity: 0;
+  animation: fade-up 0.9s ease-out forwards;
+}
+
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.delay-400 {
+  animation-delay: 0.4s;
+}
+
+.ambient-glow {
+  animation: soft-glow 4.2s ease-in-out infinite;
+}
+
+.float-slow {
+  animation: slow-float 5s ease-in-out infinite;
+}
+
+.interactive {
+  transition:
+    transform 260ms ease,
+    background-color 260ms ease,
+    color 260ms ease,
+    border-color 260ms ease,
+    box-shadow 260ms ease,
+    opacity 260ms ease;
+}
+
+.interactive:hover {
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .ambient-glow,
+  .float-slow {
+    animation: none !important;
+    opacity: 1;
+    transform: none;
+  }
+
+  .interactive {
+    transition: none;
+  }
+}
